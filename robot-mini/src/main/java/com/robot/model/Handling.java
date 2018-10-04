@@ -18,9 +18,6 @@ public class Handling implements Serializable {
     private TypeVocabularies typeVocabularys;
 
     @Embedded
-    private Cultural cultural;
-
-    @Embedded
     private Replys_Contexs replys_contexs;
 
 }

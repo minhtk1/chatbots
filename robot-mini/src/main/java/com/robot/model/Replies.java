@@ -14,4 +14,10 @@ public class Replies implements Serializable {
 
     @Column(name = "s_replies", length = 5000)
     private String symboyReplies;
+
+    @Column(length = 1)
+    private int level;
+
+    @Column(length = 50)
+    private String emotion;
 }

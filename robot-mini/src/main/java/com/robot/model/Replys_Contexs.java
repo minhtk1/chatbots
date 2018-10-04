@@ -14,14 +14,14 @@ public class Replys_Contexs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 60, name = "context_name")
+    @Column(length = 60,unique = true, name = "context_name")
     private String contextName;
 
-    @Column(length = 1)
-    private int level;
+    @Column(length = 2000,unique = true)
+    private String keyQuestion;
 
-    @Column(length = 50)
-    private String emotion;
+    @Column(length = 2000,unique = true)
+    private String keyRemoveUtf8;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "replies" , referencedColumnName = "id")

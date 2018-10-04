@@ -15,9 +15,12 @@ public class Receives implements Serializable {
     @Column(length = 1)
     private int flagProcess;
 
-    @Column(length = 5000)
+    @Column(length = 2000)
     private String keyQuestion;
 
-    @Column(length = 5000)
+    @Column(length = 2000)
     private String keyRemoveUtf8;
+
+    @Embedded
+    private Cultural cultural;
 }
