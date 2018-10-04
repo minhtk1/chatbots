@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Veriable implements Serializable {
-    
+
     public static final String CHARACTER_UTF8 = "aáàảãạâấầẩẫậăắằẳẵặdđeéèẻẽẹêếềểễệiìíỉĩịoòóỏõọôồốổỗộơờớởỡợuùúủũụưừứửữựyỳýỷỹỵ";
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> unsortMap) {
