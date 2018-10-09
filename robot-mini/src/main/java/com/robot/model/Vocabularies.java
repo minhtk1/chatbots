@@ -21,7 +21,14 @@ public class Vocabularies implements Serializable {
     @Column(length = 50)
     private String language;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "contexts", referencedColumnName = "id")
+    @Column
+    private int oftenUsed;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "m_contexts_id", referencedColumnName = "id")
     private Contexts contexts;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "m_typeVocabularies_id",referencedColumnName = "id")
+    private TypeVocabularies typeVocabularies;
 }

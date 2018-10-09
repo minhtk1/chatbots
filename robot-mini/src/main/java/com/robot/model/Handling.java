@@ -11,13 +11,13 @@ public class Handling implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Embedded
-    private Receives receives;
-
-    @Embedded
-    private TypeVocabularies typeVocabularys;
-
-    @Embedded
-    private Replys_Contexs replys_contexs;
+//    @Embedded
+//    private Receives receives;
+//
+//    @Embedded
+//    private TypeVocabularies typeVocabularys;
+//
+//    @Embedded
+//    private Replys_Contexs replys_contexs;
 
 }

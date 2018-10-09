@@ -12,15 +12,33 @@ public class Receives implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 1)
-    private int flagProcess;
-
     @Column(length = 2000)
     private String keyQuestion;
 
-    @Column(length = 2000)
-    private String keyRemoveUtf8;
+    @Column(length = 1)
+    private int flagProcess;
 
-    @Embedded
-    private Cultural cultural;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getKeyQuestion() {
+        return keyQuestion;
+    }
+
+    public void setKeyQuestion(String keyQuestion) {
+        this.keyQuestion = keyQuestion;
+    }
+
+    public int getFlagProcess() {
+        return flagProcess;
+    }
+
+    public void setFlagProcess(int flagProcess) {
+        this.flagProcess = flagProcess;
+    }
 }

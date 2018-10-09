@@ -15,14 +15,14 @@ public class TypeVocabularies implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 50)
+    @Column(unique = true,length = 50)
     private String type;
 
     @Column(length = 1)
     private int level;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "vocabularies", referencedColumnName = "id")
+    @JoinColumn(name = "TypeVocabularies_id", referencedColumnName = "id",nullable = true)
     private List<Vocabularies> vocabularies = new ArrayList<>();
 
 }

@@ -2,12 +2,11 @@ package com.robot.generic;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class GeneralGeneric implements Serializable {
-
-
 
     private Map<String, Object> getFieldNamesAndValues(final Object obj, boolean publicOnly)
             throws IllegalArgumentException,IllegalAccessException{

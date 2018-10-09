@@ -20,4 +20,8 @@ public class Replies implements Serializable {
 
     @Column(length = 50)
     private String emotion;
+
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "contexts_id",referencedColumnName = "id")
+    private Contexts contexts;
 }

@@ -14,9 +14,6 @@ public class Replys_Contexs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 60,unique = true, name = "context_name")
-    private String contextName;
-
     @Column(length = 2000,unique = true)
     private String keyQuestion;
 
@@ -24,10 +21,10 @@ public class Replys_Contexs implements Serializable {
     private String keyRemoveUtf8;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "replies" , referencedColumnName = "id")
+    @JoinColumn(name = "Replys_Contexs_id" , referencedColumnName = "id")
     private List<Replies> replies = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "contexts", referencedColumnName = "id")
+    @JoinColumn(name = "Replys_Contexs_id", referencedColumnName = "id")
     private List<Contexts> contexts = new ArrayList<>();
 }

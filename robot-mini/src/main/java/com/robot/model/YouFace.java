@@ -7,6 +7,7 @@ import java.util.Date;
 @Table(name = "you_face")
 @Entity
 public class YouFace implements Serializable {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
