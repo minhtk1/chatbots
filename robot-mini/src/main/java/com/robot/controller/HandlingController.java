@@ -3,9 +3,7 @@ package com.robot.controller;
 
 import com.robot.Interface.IHandlingService;
 import com.robot.common.interface_common.ICMethod;
-import com.robot.model.Receives;
-import com.robot.model.Replys_Contexs;
-import com.robot.model.Vocabularies;
+import com.robot.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -49,7 +48,14 @@ public class HandlingController {
                         System.out.println("word not in dictionary");
                         return new ResponseEntity(wordNotFound,HttpStatus.OK);
                     }else{
-                        splitKeyQuestion = keyQuestion.split(" ");
+                        // get type vocabulary
+                        List<Replies> listReply;
+                        String reply = "";
+                        Map<String,Long> typeDangleWord = this.getTypeByWord(splitKeyQuestion);
+                        for (Map.Entry<String, Long> entry : typeDangleWord.entrySet()){
+                            listReply = handlingService.findReplyByContexs(entry.getValue());
+                        }
+                        return new ResponseEntity(typeDangleWord,HttpStatus.OK);
                     }
                 }
             }
@@ -60,14 +66,33 @@ public class HandlingController {
         }
     }
 
+    private Map<String,Long> getTypeByWord(String[] keyQuestion){
+        Map<String, Long> result = new HashMap<>();
+        List<Vocabularies> vocabulary;
+        Contexts contexts;
+        for(int i = 0;i < keyQuestion.length;i++){
+            String upperCase = keyQuestion[i].toUpperCase();
+            String removeUtf8 = this.icMethod.removePointCodeUtf8(keyQuestion[i]).toUpperCase();
+            vocabulary = handlingService.findByVocabulary(upperCase, removeUtf8);
+            if(vocabulary.size() > 0){
+                for(Vocabularies element: vocabulary){
+                    if(element.getContexts() != null){
+                        contexts = element.getContexts();
+                        result.put(keyQuestion[i], contexts.getId());
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
     private Map<String,String> wordNotInDictionary(String[] keyQuestion){
         Map<String, String> result = new HashMap<>();
         int lengKey = keyQuestion.length;
         int index = 0;
         boolean checked;
         boolean stop;
-        Vocabularies vocabulary;
-        Vocabularies vocabularyRemoveUtf8;
+        List<Vocabularies> vocabulary;
         String temp = "";
         String testSplitLength[];
         for(int i = 0;i < keyQuestion.length;i++){
@@ -80,9 +105,8 @@ public class HandlingController {
                 while (!stop){
                     String upperCase = temp.toUpperCase();
                     String removeUtf8 = this.icMethod.removePointCodeUtf8(temp).toUpperCase();
-                    vocabulary = handlingService.findByVocabulary(upperCase);
-                    vocabularyRemoveUtf8 = handlingService.findByVocabularyNotUtf8(removeUtf8);
-                    if(vocabulary == null && vocabularyRemoveUtf8 == null){
+                    vocabulary = handlingService.findByVocabulary(upperCase,removeUtf8);
+                    if(vocabulary.size() == 0){
                         if(index == lengKey - 1){
                             temp += " " + keyQuestion[index].toUpperCase();
                         }else if(index < lengKey - 2){
