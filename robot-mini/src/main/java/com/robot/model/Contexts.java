@@ -17,6 +17,9 @@ public class Contexts implements Serializable {
     @Column(unique = true,nullable = false)
     private String contextName;
 
+    @Column(nullable = true,length = 5)
+    private Integer levelReply;
+
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "Contexts_id", referencedColumnName = "id",nullable = true)
     private List<Vocabularies> vocabularies = new ArrayList<>();
@@ -43,5 +46,13 @@ public class Contexts implements Serializable {
 
     public void setVocabularies(List<Vocabularies> vocabularies) {
         this.vocabularies = vocabularies;
+    }
+
+    public Integer getLevelReply() {
+        return levelReply;
+    }
+
+    public void setLevelReply(Integer levelReply) {
+        this.levelReply = levelReply;
     }
 }

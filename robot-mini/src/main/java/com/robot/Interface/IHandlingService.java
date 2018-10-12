@@ -12,4 +12,7 @@ public interface IHandlingService {
 
     // reply
     List<Replies> findReplyByContexs(Long id);
+
+    //vocabulary
+    List<Vocabularies> allWord();
 }

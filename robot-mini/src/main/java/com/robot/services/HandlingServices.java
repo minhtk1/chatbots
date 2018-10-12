@@ -42,4 +42,11 @@ public class HandlingServices implements IHandlingService{
     public List<Replies> findReplyByContexs(Long id) {
         return replyRespository.findAllByContexts(id);
     }
+
+    //vocabulary
+
+    @Override
+    public List<Vocabularies> allWord() {
+        return vocabulariesRespository.findAll();
+    }
 }

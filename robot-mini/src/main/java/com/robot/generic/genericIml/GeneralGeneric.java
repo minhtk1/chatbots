@@ -1,15 +1,21 @@
-package com.robot.generic;
+package com.robot.generic.genericIml;
+
+import com.robot.generic.IGeneralGeneric;
+import com.robot.generic.IGeneric;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class GeneralGeneric implements Serializable {
+@Component(value = "generalGeneric")
+public class GeneralGeneric<T> implements Serializable,IGeneralGeneric{
 
-    private Map<String, Object> getFieldNamesAndValues(final Object obj, boolean publicOnly)
-            throws IllegalArgumentException,IllegalAccessException{
+    @Override
+    public Map<String, Object> getFieldNamesAndValues(Object obj, boolean publicOnly) throws IllegalArgumentException, IllegalAccessException {
         Class<? extends Object> c1 = obj.getClass();
         Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = c1.getDeclaredFields();
@@ -64,4 +70,11 @@ public class GeneralGeneric implements Serializable {
 
         return sortedMap;
     }
+
+    public final T getRandomList(List<T> list) {
+        //0-4
+        int index = ThreadLocalRandom.current().nextInt(list.size());
+        return (T) list.get(index);
+    }
+
 }

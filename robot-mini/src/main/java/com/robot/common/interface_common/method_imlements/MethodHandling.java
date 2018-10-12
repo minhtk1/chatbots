@@ -9,6 +9,19 @@ import org.springframework.stereotype.Component;
 public class MethodHandling implements ICMethod {
 
     @Override
+    public int factorial(int n) {
+        int factorial = 1;
+        if (n == 0 || n == 1) {
+            return factorial;
+        } else {
+            for (int i = 2; i <= n; i++) {
+                factorial *= i;
+            }
+            return factorial;
+        }
+    }
+
+    @Override
     public String removePointCodeUtf8(String value) {
         if(!value.isEmpty() && value != null){
             value = value.toLowerCase();
