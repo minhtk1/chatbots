@@ -96,9 +96,11 @@ public class HandlingController<T> {
         Map<String, List<Replies>> result = new HashMap<>();
         String resultReply = "";
         for (Map.Entry<String, Contexts> entry : contextDangleWord.entrySet()){
-            repliesList = handlingService.findReplyByContexs(entry.getValue().getId());
-            if(repliesList.size() > 0){
-                result.put(entry.getKey(),repliesList);
+            if(entry.getValue() != null){
+                repliesList = handlingService.findReplyByContexs(entry.getValue().getId());
+                if(repliesList.size() > 0){
+                    result.put(entry.getKey(),repliesList);
+                }
             }
         }
         for (Map.Entry<String, List<Replies>> entry : result.entrySet()){
@@ -111,11 +113,11 @@ public class HandlingController<T> {
 
     private Set<String> returnQuesttionBotsToYou(String status) {
         Set<String> result = new HashSet<>();
-        String temp = "";
+        String temp;
         for (Map.Entry<String, String> entry : sortVocabulary.entrySet()){
             if(status.equals(entry.getValue())){
                 temp = "Từ " + entry.getKey().toLowerCase() + " tôi không hiểu";
-                if(!temp.isEmpty()){
+                if(!temp.isEmpty() && temp != null){
                     result.add(temp);
                 }
             }
